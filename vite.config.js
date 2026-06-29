@@ -1,12 +1,21 @@
 import { defineConfig } from 'vite';
+import { resolve } from 'path';
 
 export default defineConfig({
-  // Vite configuration options go here
   server: {
-    port: 3000, // Matches the port you were using previously with http-server
-    open: true, // Automatically opens the app in the browser on server start
+    port: 3000,
+    open: true,
   },
   build: {
-    outDir: 'dist', // The directory where the production build will be placed
+    outDir: 'dist',
+    rollupOptions: {
+      // Vercel needs to know about all your HTML files to build them correctly
+      input: {
+        main: resolve(__dirname, 'index.html'),
+        listing: resolve(__dirname, 'listing.html'),
+        details: resolve(__dirname, 'details.html'),
+        upload: resolve(__dirname, 'upload.html')
+      }
+    }
   },
 });
