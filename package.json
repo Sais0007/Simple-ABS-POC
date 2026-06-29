@@ -3,9 +3,14 @@
   "version": "1.0.0",
   "description": "Asia Bulk Sacks Inquiry Processing POC",
   "scripts": {
-    "dev": "npx -y http-server -p 3000 -c-1"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "vite": "^8.1.0"
+  }
 }
