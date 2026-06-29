@@ -652,6 +652,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             showToast(`CSV data exported successfully for ${dbList[idx].id}.`, 'success');
             updateDynamicUI(dbList[idx]);
+        }
         });
     }
 

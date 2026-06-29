@@ -186,3 +186,8 @@ function inferBuyerName(filename) {
 // Auto-run DB init
 getInquiriesFromDB();
 resumeProcessingTimers();
+
+// Expose globals for Vite module scope
+window.getInquiriesFromDB = getInquiriesFromDB;
+window.saveInquiriesToDB = saveInquiriesToDB;
+window.showToast = showToast;
