@@ -1,0 +1,11 @@
+{
+  "name": "abs-simple-poc",
+  "version": "1.0.0",
+  "description": "Asia Bulk Sacks Inquiry Processing POC",
+  "scripts": {
+    "dev": "npx -y http-server -p 3000 -c-1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

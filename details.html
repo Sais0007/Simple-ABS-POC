@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inquiry Details Review | Asia Bulk Sacks Inquiry Processing POC</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="dashboard-container" style="max-width: 1200px;">
+        <!-- Global Header Layout matched to Reference Image 3 -->
+        <header class="page-inner-header" style="margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; border-bottom: none;">
+            <div style="display: flex; align-items: center;">
+                <a href="listing.html" style="display: inline-flex; align-items: center; justify-content: center; margin-right: 12px; color: var(--text-primary); text-decoration: none;" title="Back to Listing">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/>
+                    </svg>
+                </a>
+                <h2 class="page-inner-title" style="font-size: 20px; margin-right: 16px;">Inquiry Details</h2>
+                <span id="headerInquiryBadge" class="badge-id">ABS-INQ-XXXX</span>
+                
+                <div class="details-header-badges">
+                    <span id="badgeExtraction" class="badge-outline green">
+                        <span class="status-dot dot-green"></span> Extraction: Completed
+                    </span>
+                    <span id="badgeValidation" class="badge-outline green">
+                        <span class="status-dot dot-green"></span> Validation: Valid
+                    </span>
+                    <span id="badgeExported" class="badge-outline gray">
+                        <span class="status-dot dot-gray" style="background-color: #94a3b8;"></span> CSV: Not Exported
+                    </span>
+                </div>
+            </div>
+            
+            <div class="header-actions">
+                <button class="btn btn-primary" id="btnHeaderExport" style="background: #1e293b; padding: 6px 16px; border-radius: 6px; color: white; border: none; cursor: pointer; font-weight: 600;">
+                    Export CSV
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Card Wrapper: Inquiry Details (Split Screen Layout) -->
+        <main class="dashboard-card" style="padding: 24px; padding-top: 10px;">
+            <div class="details-split-container">
+                
+                <!-- LEFT PANEL: Uploaded PDF Preview (Fixed Scroll) -->
+                <div class="pdf-preview-pane">
+                    <div class="pdf-toolbar">
+                        <span id="pdfFileNameSpan" style="background-color: #ef4444; color: white; padding: 2px 8px; border-radius: 4px; font-weight: 700; font-size: 11px; display: inline-block; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; max-width: 180px;">PDF Document: Loading...</span>
+                        <div style="display: flex; align-items: center;">
+                            <span style="margin-right: 12px; cursor: pointer; font-size: 12px;">- 100% +</span>
+                        </div>
+                    </div>
+                    <div class="pdf-scroll-container">
+                        <div class="pdf-sheet" id="pdfSheet">
+                            <!-- Generated Dynamic PDF Content Injected Here by details-page.js -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT PANEL: Extracted Fields Pane (Accordion Scroll) -->
+                <div class="extraction-fields-pane">
+                    <div class="fields-scroll-container" id="fieldsForm">
+                        
+                                                <!-- Accordion 1: Core Inquiry Information -->
+                        <details class="accordion-item">
+                            <summary class="accordion-summary">1. Core Inquiry Information (7)</summary>
+                            <div class="accordion-content">
+                                <div class="floating-group">
+                                    <input type="text" id="fldCustomerName" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Customer Name</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldInquiryRef" class="floating-input" placeholder=" " disabled>
+                                    <label class="floating-label">Inquiry Ref No.</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldSwl" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Safe Working Load (SWL)</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldSwlUnit" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">SWL Unit</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldSf" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Safety Factor</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldQty" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Quantity</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldBagType" class="floating-input" placeholder=" " disabled>
+                                    <label class="floating-label">Bag Type</label>
+                                </div>
+                            </div>
+                        </details>
+
+                        <!-- Accordion 2: Bag Design -->
+                        <details class="accordion-item">
+                            <summary class="accordion-summary">2. Bag Design (21)</summary>
+                            <div class="accordion-content">
+                                <div class="floating-group">
+                                    <input type="text" id="fldUnType" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">UN Type</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldBagLength" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Bag Length</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldBagWidth" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Bag Width</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldBagHeight" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Bag Height</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldDimensionType" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Dimension Type</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldDimensionUnit" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Dimension Unit</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldTopDesign" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Top Design</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldSkirtRope" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Skirt Rope</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldSkirtHemming" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Skirt Hemming</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldTopSpoutDiameter" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Top Spout Diameter</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldTopSpoutHeight" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Top Spout Height</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldTopSpoutRope" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Top Spout Rope</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldTopSecondaryClosure" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Top Secondary Closure</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldTopSecondaryClosureRope" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Top Sec. Closure Rope</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldBottomSpoutDiameter" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Bottom Spout Diameter</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldBottomSpoutHeight" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Bottom Spout Height</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldBottomSpoutRope" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Bottom Spout Rope</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldBottomSpoutHemming" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Bottom Spout Hemming</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldBottomSecondaryClosure" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Bottom Secondary Closure</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldBottomSecondaryClosureRope" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Bottom Sec. Closure Rope</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldHygieneLevel" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Hygiene Level</label>
+                                </div>
+                            </div>
+                        </details>
+
+                        <!-- Accordion 3: Fabric -->
+                        <details class="accordion-item">
+                            <summary class="accordion-summary">3. Fabric (17)</summary>
+                            <div class="accordion-content">
+                                <div class="floating-group">
+                                    <input type="text" id="fldFabricType" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Fabric Type</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldBodyFabricGSM" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Body Fabric GSM</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldBodyFabricCoatingGSM" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Body Fabric Coating GSM</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldDoubleLayer" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Double Layer</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldDoubleLayerGSM" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Double Layer GSM</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldConicalBottom" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Conical Bottom</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldBottomFlap" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Bottom Flap</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldBottomFlapLength" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Bottom Flap Length</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldBottomFlapWidth" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Bottom Flap Width</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldConicalTop" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Conical Top</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldTopFlap" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Top Flap</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldTopFlapLength" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Top Flap Length</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldTopFlapWidth" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Top Flap Width</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldInternalBaffles" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Internal Baffles</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldBafflesGSM" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Baffles GSM</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldBafflesCoatingType" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Baffles Coating Type</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldBafflesPosition" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Baffles Position</label>
+                                </div>
+                            </div>
+                        </details>
+
+                        <!-- Accordion 4: Material / Liner -->
+                        <details class="accordion-item">
+                            <summary class="accordion-summary">4. Material / Liner (5)</summary>
+                            <div class="accordion-content">
+                                <div class="floating-group">
+                                    <input type="text" id="fldLinerType" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Liner Type</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldLinerDesign" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Liner Design</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldLinerAttachment" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Liner Attachment</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldBaffleLiner" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Baffle Liner</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldLinerThickness" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Liner Thickness (Micron)</label>
+                                </div>
+                            </div>
+                        </details>
+
+                        <!-- Accordion 5: Loop Configuration -->
+                        <details class="accordion-item">
+                            <summary class="accordion-summary">5. Loop Configuration (8)</summary>
+                            <div class="accordion-content">
+                                <div class="floating-group">
+                                    <input type="text" id="fldLoopType" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Loop Type</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldLoopGrammage" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Loop Grammage</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldLoopAttachmentSL" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Loop Attachment (SL)</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldLoopAttachmentLL" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Loop Attachment (LL)</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldLoopDropdownLength" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Loop Dropdown Length</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldLoopColour" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Loop Colour</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldLoopCover" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Loop Cover</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldLoopCoverColour" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Loop Cover Colour</label>
+                                </div>
+                            </div>
+                        </details>
+
+                        <!-- Accordion 6: Band Details -->
+                        <details class="accordion-item">
+                            <summary class="accordion-summary">6. Band Details (2)</summary>
+                            <div class="accordion-content">
+                                <div class="floating-group">
+                                    <input type="text" id="fldBandRequirement" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Band Requirement</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldBandColour" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Band Colour</label>
+                                </div>
+                            </div>
+                        </details>
+
+                        <!-- Accordion 7: Bag Construction -->
+                        <details class="accordion-item">
+                            <summary class="accordion-summary">7. Bag Construction (2)</summary>
+                            <div class="accordion-content">
+                                <div class="floating-group">
+                                    <input type="text" id="fldStitchingType" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Stitching Type</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldStitchingColour" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Stitching Colour</label>
+                                </div>
+                            </div>
+                        </details>
+
+                        <!-- Accordion 8: Accessories -->
+                        <details class="accordion-item">
+                            <summary class="accordion-summary">8. Accessories (16)</summary>
+                            <div class="accordion-content">
+                                <div class="floating-group">
+                                    <input type="text" id="fldDustproof" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Dustproof</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldDustproofSingle" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Dustproof Single</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldDustproofDouble" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Dustproof Double</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldDustproofTriple" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Dustproof Triple</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldExtraAccessories" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Extra Accessories</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldPatchUnderLoop" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Patch Under Loop</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldMultifilamentLoop" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Multifilament Loop</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldExtraLoop" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Extra Loop</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldExtraLoopColour" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Extra Loop Colour</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldFullLoop" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Full Loop</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldFullLoopColour" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Full Loop Colour</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldPrintingRequired" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Printing Required</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldPrintingSide" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Printing Side</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldPrintingColour" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Printing Colour</label>
+                                </div>
+                                <div class="floating-group" style="grid-column: 1 / -1; height: auto;">
+                                    <textarea id="fldCustomerInstructions" class="floating-input" placeholder=" " style="height: 60px; padding-top: 20px; resize: none;"></textarea>
+                                    <label class="floating-label" style="top: 14px; transform: none;">Customer Instructions / Comments</label>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="text" id="fldDocumentPouch" class="floating-input" placeholder=" ">
+                                    <label class="floating-label">Document Pouch</label>
+                                </div>
+                            </div>
+                        </details>
+                    </div>
+
+                    <!-- Footer Actions -->
+                    <div class="fields-footer">
+                        <a href="listing.html" class="btn-cancel" id="btnDetailsCancel">Cancel</a>
+                        <button class="btn btn-primary" id="btnDetailsSave" style="background: var(--primary-color); padding: 8px 18px; font-size: 12px; border-radius: 6px; color: white; border: none; cursor: pointer; font-weight: 600;">Save Changes</button>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <!-- Copyright Footer -->
+        <footer class="page-footer">
+            <div class="page-footer-left">
+                &copy; 2026 ABS Inquiry POC. All Rights Reserved.
+            </div>
+            <div class="page-footer-right">
+                Designed and Developed by <a href="https://www.hiddenbrains.com" target="_blank">Hidden Brains</a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Alert toast elements -->
+    <div id="toastContainer"></div>
+
+    <script src="common.js"></script>
+    <script src="details-page.js"></script>
+</body>
+</html>
